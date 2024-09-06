@@ -284,7 +284,11 @@ const updateParams = res => {
             Cookie: getCookies()
         }
     });
-    console.log('headers: ', headers);
+    const headers = {
+        ...AI.hdr(),
+        Cookie: getCookies()
+    };
+    console.log(headers);
     await checkResErr(bootstrapRes);
     const bootstrap = await bootstrapRes.json();
     if (bootstrap.account === null) {
