@@ -286,10 +286,15 @@ const updateParams = res => {
     });
     await checkResErr(bootstrapRes);
     const bootstrap = await bootstrapRes.json();
-    console.log(headers);
     if (bootstrap.account === null) {
         console.log(`[35mNull![0m`);
         return CookieCleaner('Null', percentage);
+    } else {
+        const headers = {
+            ...AI.hdr(), // 重新获取头信息
+            Cookie: getCookies() // 重新获取 cookie
+        };
+        console.log(headers);
     }
     const bootAccInfo = bootstrap.account.memberships.find(item => item.organization.capabilities.includes('chat')).organization;
     cookieModel = bootstrap.statsig.values.layer_configs["HPOHwBLNLQLxkj5Yn4bfSkgCQnBX28kPR7h/BNKdVLw="]?.value?.console_default_model_override?.model || bootstrap.statsig.values.dynamic_configs["6zA9wvTedwkzjLxWy9PVe7yydI00XDQ6L5Fejjq/2o8="]?.value?.model;
