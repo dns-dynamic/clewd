@@ -284,13 +284,9 @@ const updateParams = res => {
             Cookie: getCookies()
         }
     });
-    const headers = {
-        ...AI.hdr(),
-        Cookie: getCookies()
-    };
-    console.log(headers);
     await checkResErr(bootstrapRes);
     const bootstrap = await bootstrapRes.json();
+    console.log(headers);
     if (bootstrap.account === null) {
         console.log(`[35mNull![0m`);
         return CookieCleaner('Null', percentage);
